@@ -29,7 +29,9 @@ const Restaurants = () => {
       <Header />
       <div className="px-5 py-6">
         <h2 className="mb-6 text-lg font-semibold">
-          Restaurantes Recomendados
+          {restaurants.length === 0
+            ? "Restaurante não encontrado"
+            : "Restaurantes Recomendados"}
         </h2>
         <div className="flex w-full flex-col gap-6 ">
           {restaurants.map((restaurant) => (
