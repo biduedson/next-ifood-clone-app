@@ -53,7 +53,6 @@ const ProductDetails = ({
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
 
-  // eslint-disable-next-line no-unused-vars
   const { addProductToCArt, products } = useContext(CartContext);
 
   const addToCart = ({ emptyCart }: { emptyCart?: boolean }) => {
