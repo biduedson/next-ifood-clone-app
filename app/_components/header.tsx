@@ -42,7 +42,7 @@ const Header = () => {
         </div>
 
         <Sheet>
-          <SheetTrigger>
+          <SheetTrigger asChild>
             <Button
               size="icon"
               variant="ghost"
@@ -107,9 +107,12 @@ const Header = () => {
                   <Button
                     variant="ghost"
                     className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                    asChild //para aplicar os stilos acima ao link e não criar uma nova tag <a>
                   >
-                    <ScrollTextIcon size={16} />
-                    <span className="block">Meus Pedidos</span>
+                    <Link href="/my-orders">
+                      <ScrollTextIcon size={16} />
+                      <span className="block">Meus Pedidos</span>
+                    </Link>
                   </Button>
 
                   <Button

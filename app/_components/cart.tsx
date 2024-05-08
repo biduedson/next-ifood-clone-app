@@ -5,7 +5,7 @@ import { Card, CardContent } from "./ui/card";
 import { formatCurrency } from "../_helpers/price";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
-import { OderStatus } from "@prisma/client";
+import { OrderStatus } from "@prisma/client";
 import { createOrder } from "../_actions/order";
 import { useSession } from "next-auth/react";
 import { Loader2 } from "lucide-react";
@@ -43,9 +43,17 @@ const Cart = () => {
         restaurant: {
           connect: { id: restaurant.id },
         },
-        status: OderStatus.CORFIMED,
+        status: OrderStatus.CORFIRMED,
         user: {
           connect: { id: data.user.id },
+        },
+        products: {
+          createMany: {
+            data: products.map((product) => ({
+              productId: product.id,
+              quantity: product.quantity,
+            })),
+          },
         },
       });
       clearCart();
@@ -133,12 +141,15 @@ const Cart = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={isConfirmDialogOpen}>
+              Cancelar
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleFinishOrderClick}
+              disabled={isSubmitLoading}
+            >
               {isSubmitLoading && (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               )}
-              Cancelar
-            </AlertDialogCancel>
-            <AlertDialogAction onClick={handleFinishOrderClick}>
               Finalizar
             </AlertDialogAction>
           </AlertDialogFooter>
