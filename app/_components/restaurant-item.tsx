@@ -15,11 +15,14 @@ const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
   return (
     <Link
       href={`/restaurants/${restaurant.id}`}
-      className={cn("min-w-[266px] max-w-[266px]", className)}
+      className={cn(
+        "flex min-w-[266px] max-w-[266px] items-center justify-center  lg:h-[222px] ",
+        className,
+      )}
     >
       <div className="w-full space-y-3">
         {/*IMAGE*/}
-        <div className="relative h-[136px] w-full">
+        <div className="relative h-[136px] w-full lg:h-[165px] lg:w-[320px]">
           <Image
             src={restaurant.imageUrl}
             fill

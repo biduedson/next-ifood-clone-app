@@ -54,6 +54,7 @@
   }
 
   body {
-    @apply  text-foreground antialiased;
+    @apply  text-foreground antialiased ;
   }
+
 }

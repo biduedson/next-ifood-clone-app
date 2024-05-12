@@ -6,11 +6,22 @@ const RestaurantList = async () => {
   const restaurants = await db.restaurant.findMany({
     take: 10,
   });
+  const limitedRestaurants = restaurants.slice(0, 3);
+
   return (
-    <div className="flex gap-4 overflow-x-scroll px-5 [&::-webkit-scrollbar]:hidden">
-      {restaurants.map((restaurant) => (
-        <RestaurantItem key={restaurant.id} restaurant={restaurant} />
-      ))}
+    <div className="flex justify-center">
+      <div className="flex  gap-4 overflow-x-scroll lg:hidden [&::-webkit-scrollbar]:hidden">
+        {restaurants.map((restaurant) => (
+          <RestaurantItem key={restaurant.id} restaurant={restaurant} />
+        ))}
+      </div>
+      <div className="hidden w-full lg:flex">
+        {limitedRestaurants.map((restaurant) => (
+          <div key={restaurant.id} className="flex w-full justify-center">
+            <RestaurantItem key={restaurant.id} restaurant={restaurant} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
