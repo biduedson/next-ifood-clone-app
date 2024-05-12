@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 "use client";
-
+import Cookies from "js-cookie";
 import { Prisma, Product } from "@prisma/client";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 import { calculateProductTotalPrice } from "../_helpers/price";
@@ -64,7 +64,15 @@ export const CartContext = createContext<ICartContext>({
 });
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [products, setProducts] = useState<CartProduct[]>([]);
+  const initialState = Cookies.get("cart")
+    ? JSON.parse(Cookies.get("cart")!)
+    : [];
+
+  const [products, setProducts] = useState<CartProduct[]>(initialState);
+
+  useEffect(() => {
+    Cookies.set("cart", JSON.stringify(products));
+  }, [products]);
 
   const subTotalPrice = useMemo(() => {
     return products.reduce((acc, product) => {
