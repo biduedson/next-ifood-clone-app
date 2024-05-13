@@ -16,13 +16,13 @@ const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
     <Link
       href={`/restaurants/${restaurant.id}`}
       className={cn(
-        "flex min-w-[266px] max-w-[266px] items-center justify-center px-10 lg:h-[222px] ",
+        "flex min-w-[266px] max-w-[266px] items-center justify-center  lg:h-[222px] ",
         className,
       )}
     >
       <div className="flex w-full flex-col space-y-3 ">
         {/*IMAGE*/}
-        <div className="relative  h-[136px] w-[266px]  lg:h-[165px] lg:min-w-[300px]  xl:min-w-[380px]">
+        <div className="relative  h-[136px] w-full  lg:h-[165px] lg:min-w-[300px]  xl:min-w-[380px]">
           <Image
             src={restaurant.imageUrl}
             fill

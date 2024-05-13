@@ -1,11 +1,11 @@
 import { db } from "@/app/_lib/prisma";
 import { notFound } from "next/navigation";
-import RestaurantImage from "./_componets/restaurant-image";
+import RestaurantImage from "./_components/restaurant-image";
 import Image from "next/image";
 import { StarIcon } from "lucide-react";
 import Deliveryinfo from "@/app/_components/delivery-info";
 import ProductList from "@/app/_components/productList";
-import CartBanner from "./_componets/cart-banner";
+import CartBanner from "./_components/cart-banner";
 
 interface RestaurantPageProps {
   params: {
