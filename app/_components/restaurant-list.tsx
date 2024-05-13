@@ -9,15 +9,15 @@ const RestaurantList = async () => {
   const limitedRestaurants = restaurants.slice(0, 3);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center ">
       <div className="flex  gap-4 overflow-x-scroll lg:hidden [&::-webkit-scrollbar]:hidden">
         {restaurants.map((restaurant) => (
           <RestaurantItem key={restaurant.id} restaurant={restaurant} />
         ))}
       </div>
-      <div className="hidden w-full lg:flex">
+      <div className="hidden w-full  grid-cols-3 lg:grid ">
         {limitedRestaurants.map((restaurant) => (
-          <div key={restaurant.id} className="flex w-full justify-center">
+          <div key={restaurant.id}>
             <RestaurantItem key={restaurant.id} restaurant={restaurant} />
           </div>
         ))}

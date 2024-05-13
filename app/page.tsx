@@ -33,75 +33,77 @@ const Home = async () => {
         <Search />
       </div>
 
-      <div className="px-5 pt-6">
-        <CategoryList />
-      </div>
-
-      <div className="px-5 pt-6 lg:hidden">
-        <PromoBanner
-          src="/promo-banner-01.png"
-          alt="Até 30% de desconto em pizzas!"
-        />
-      </div>
-
-      <div className="space-y-4 pt-6 lg:justify-center xl:px-28    xl:pt-10 2xl:px-36">
-        <div className="flex w-full items-center justify-between px-5">
-          <h2 className="font-semibold">Pedidos Recomendados</h2>
-
-          <Button
-            variant="ghost"
-            className="h-fit p-0 text-primary hover:bg-transparent"
-            asChild //as child esta opçãp do shadcn vai pegar toda configuração do css e jogar para o elemento filho  no caso ai o link
-          >
-            <Link href="/products/recomended">
-              Ver todos
-              <ChevronRightIcon size={16} />
-            </Link>
-          </Button>
+      <div className=" xl:px-26 lg:space-y-6 lg:px-12 2xl:px-28">
+        <div className="px-5 pt-6">
+          <CategoryList />
         </div>
-        <ProductList products={products} />
-      </div>
 
-      <div className="hidden justify-center gap-8 lg:flex lg:px-5 lg:py-10 xl:px-28  2xl:px-36">
-        <div className="">
+        <div className="px-5 pt-6 lg:hidden">
           <PromoBanner
             src="/promo-banner-01.png"
             alt="Até 30% de desconto em pizzas!"
           />
         </div>
 
-        <div className="">
+        <div className="space-y-4 pt-6 lg:justify-center ">
+          <div className="flex w-full items-center justify-between px-5 lg:px-0">
+            <h2 className="font-semibold">Pedidos Recomendados</h2>
+
+            <Button
+              variant="ghost"
+              className="h-fit p-0 text-primary hover:bg-transparent"
+              asChild //as child esta opçãp do shadcn vai pegar toda configuração do css e jogar para o elemento filho  no caso ai o link
+            >
+              <Link href="/products/recomended">
+                Ver todos
+                <ChevronRightIcon size={16} />
+              </Link>
+            </Button>
+          </div>
+          <ProductList products={products} />
+        </div>
+
+        <div className="hidden justify-center gap-8 lg:flex ">
+          <div className="">
+            <PromoBanner
+              src="/promo-banner-01.png"
+              alt="Até 30% de desconto em pizzas!"
+            />
+          </div>
+
+          <div className="">
+            <PromoBanner
+              src="/promo-banner-02.png"
+              alt="A partir de 17,90 em lanches"
+            />
+          </div>
+        </div>
+
+        <div className="px-5 pt-6 lg:hidden">
           <PromoBanner
             src="/promo-banner-02.png"
             alt="A partir de 17,90 em lanches"
           />
         </div>
-      </div>
 
-      <div className="px-5 pt-6 lg:hidden">
-        <PromoBanner
-          src="/promo-banner-02.png"
-          alt="A partir de 17,90 em lanches"
-        />
-      </div>
+        <div className=" items-center space-y-4 pt-6 ">
+          <div className="flex items-center justify-between px-5 lg:px-0">
+            <h2 className="font-semibold">Restaurantes Recomendados</h2>
 
-      <div className=" items-center space-y-4 pt-6 xl:px-28 xl:py-10 2xl:px-36">
-        <div className="flex items-center justify-between px-5">
-          <h2 className="font-semibold">Restaurantes Recomendados</h2>
+            <Button
+              variant="ghost"
+              className="h-fit p-0 text-primary hover:bg-transparent"
+              asChild
+            >
+              <Link href="/restaurants/recomended">
+                Ver todos
+                <ChevronRightIcon size={16} />
+              </Link>
+            </Button>
+          </div>
 
-          <Button
-            variant="ghost"
-            className="h-fit p-0 text-primary hover:bg-transparent"
-            asChild
-          >
-            <Link href="/restaurants/recomended">
-              Ver todos
-              <ChevronRightIcon size={16} />
-            </Link>
-          </Button>
+          <RestaurantList />
         </div>
-
-        <RestaurantList />
       </div>
     </>
   );
