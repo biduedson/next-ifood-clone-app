@@ -35,7 +35,7 @@ const Home = async () => {
         </div>
 
         <div className=" xl:px-26 lg:space-y-6 lg:px-12 2xl:px-28">
-          <div className="px-5 pt-6">
+          <div className="pt-6">
             <CategoryList />
           </div>
 
