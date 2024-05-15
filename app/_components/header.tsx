@@ -33,7 +33,7 @@ const Header = () => {
           <Link href="/">
             {/* No image do next/link sempre que uso fill ela vai ocupar 100% da imagem ta tag pai dele desde que esta esteja como relative*/}
             <Image
-              src="/logo.png"
+              src="/Logo.png"
               alt="Fsw Foods"
               fill
               className="object-cover"
