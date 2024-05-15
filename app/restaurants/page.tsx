@@ -1,12 +1,23 @@
-"use client";
-
 import { Suspense } from "react";
 import Restaurants from "./[id]/_components/restaurants";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../_lib/auth";
+import { db } from "../_lib/prisma";
 
-const RestaurantsPage = () => {
+const RestaurantsPage = async () => {
+  const session = await getServerSession(authOptions);
+  const userFavoriteRestaurants = await db.userFavoriteRestaurants.findMany({
+    where: {
+      userId: session?.user.id,
+    },
+    include: {
+      restaurant: true,
+    },
+  });
+
   return (
     <Suspense>
-      <Restaurants />;
+      <Restaurants userFavoriteRestaurants={userFavoriteRestaurants} />;
     </Suspense>
   );
 };
