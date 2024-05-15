@@ -107,14 +107,14 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
         ))}
       </div>
 
-      <div className="mt-6 space-y-4">
+      <div className="mt-6 space-y-4 px-5">
         {/*TODO mostrar produtos mais pedidos quando implementarmos a realização de  pedidos */}
         <h2 className="px-5 font-semibold">Mais pedidos</h2>
         <ProductList products={restaurant.products} />
       </div>
 
       {restaurant.categories.map((category) => (
-        <div className="mt-6 space-y-4" key={category.id}>
+        <div className="mt-6 space-y-4 px-5" key={category.id}>
           <h2 className="px-5 font-semibold">{category.name}</h2>
           <ProductList products={category.products} />
         </div>

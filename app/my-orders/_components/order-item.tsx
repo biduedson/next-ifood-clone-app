@@ -47,8 +47,11 @@ const OrderItem = ({ order }: OrderItemProps) => {
   const handleRedoOrderClick = () => {
     for (const orderProduct of order.products) {
       addProductToCArt({
-        product: { ...orderProduct.product, restaurant: order.restaurant },
-        quantity: orderProduct.quantity,
+        product: {
+          ...orderProduct.product,
+          restaurant: order.restaurant,
+          quantity: orderProduct.quantity,
+        },
       });
     }
 

@@ -98,8 +98,10 @@ const Header = () => {
                 variant="ghost"
                 className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
               >
-                <HomeIcon size={16} />
-                <span className="block">Inicio</span>
+                <Link href="/" className="flex space-x-3">
+                  <HomeIcon size={16} />
+                  <span className="block">Inicio</span>
+                </Link>
               </Button>
 
               {data?.user && (
