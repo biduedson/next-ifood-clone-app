@@ -2,6 +2,10 @@ import { db } from "@/app/_lib/prisma";
 import { notFound } from "next/navigation";
 import ProductImage from "./_components/product-image";
 import ProductDetails from "./_components/product-details";
+import AddProductToCart from "./_components/add-product-to-cart";
+import ProductList from "@/app/_components/productList";
+import Header from "@/app/_components/header";
+import { Separator } from "@/app/_components/ui/separator";
 
 interface ProductPageProps {
   params: {
@@ -37,13 +41,28 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
   });
 
   return (
-    <div>
-      {/*IMAGEM*/}
-      <ProductImage product={product} />
+    <>
+      <div className="hidden w-full lg:flex">
+        <Header isSearch={true} />
+      </div>
+      <Separator className="mt-3 hidden lg:flex" />
+      <div className="lg:mt-4 lg:px-12 xl:px-24 2xl:px-28">
+        <div className="gap-4 lg:flex lg:w-full lg:justify-between ">
+          {/*IMAGEM*/}
+          <ProductImage product={product} />
 
-      {/* TITULO E PREÇO */}
-      <ProductDetails product={product} complementaryProducts={juices} />
-    </div>
+          {/* TITULO E PREÇO */}
+          <ProductDetails product={product} />
+        </div>
+        <div className="mb-2 mt-6 space-y-3 px-5 lg:px-0">
+          <h3 className="font-semibold">Pedidos Recomendados</h3>
+          <ProductList products={juices} />
+        </div>
+        <div className="lg:hidden">
+          <AddProductToCart product={product} />
+        </div>
+      </div>
+    </>
   );
 };
 

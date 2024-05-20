@@ -25,7 +25,7 @@ const Search = () => {
     <form className="flex gap-2" onSubmit={handleSearcSubmit}>
       <Input
         placeholder="Buscar Restaurantes"
-        className="border-none"
+        className="border-none  lg:w-[600px]"
         onChange={handleChange}
         value={search}
       />

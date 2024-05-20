@@ -20,15 +20,20 @@ import {
 } from "./ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
+import Search from "./search";
 
-const Header = () => {
+interface IHeaderProps {
+  isSearch: boolean;
+}
+
+const Header = ({ isSearch }: IHeaderProps) => {
   const { data } = useSession();
 
   const handleSignOutClick = () => signOut();
   const handleSignInClick = () => signIn();
   return (
     <>
-      <div className="flex justify-between px-5 pt-6">
+      <div className="flex w-full justify-between px-5 pt-6 lg:h-[80px] lg:items-center">
         <div className="relative h-[30px] w-[100px]">
           <Link href="/">
             {/* No image do next/link sempre que uso fill ela vai ocupar 100% da imagem ta tag pai dele desde que esta esteja como relative*/}
@@ -41,6 +46,11 @@ const Header = () => {
           </Link>
         </div>
 
+        {isSearch && (
+          <div className="lg:flex lg:w-[600px]">
+            <Search />
+          </div>
+        )}
         <Sheet>
           <SheetTrigger asChild>
             <Button
