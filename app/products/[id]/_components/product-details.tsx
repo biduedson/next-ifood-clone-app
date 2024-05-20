@@ -10,6 +10,7 @@ import { Button } from "@/app/_components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Deliveryinfo from "@/app/_components/delivery-info";
 import AddProductToCart from "./add-product-to-cart";
+import { useState } from "react";
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
