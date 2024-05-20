@@ -10,6 +10,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/_lib/auth";
 import { Button } from "@/app/_components/ui/button";
 import Link from "next/link";
+import Header from "@/app/_components/header";
+import { Separator } from "@/app/_components/ui/separator";
 
 interface RestaurantPageProps {
   params: {
@@ -67,6 +69,10 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
   });
   return (
     <>
+      <div className="hidden w-full lg:flex">
+        <Header isSearch={true} />
+      </div>
+      <Separator className="mt-3 hidden lg:flex" />
       <div className="items-center lg:flex lg:w-full lg:flex-col  lg:items-center lg:px-12 lg:py-4 xl:px-16 2xl:px-28   ">
         <div className=" w-full lg:flex lg:justify-between lg:gap-6">
           <RestaurantImage
@@ -75,7 +81,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
           />
 
           <div className="lg:flex lg:h-[380px] lg:w-[402px] lg:flex-col  ">
-            <div className="relative z-50 mt-[-1.5rem] flex items-center justify-between rounded-tl-3xl rounded-tr-3xl  bg-white px-5 pt-5 lg:px-0 ">
+            <div className="relative z-50 mt-[-1.5rem] flex items-center justify-between rounded-tl-3xl rounded-tr-3xl  bg-transparent px-5 pt-5 lg:px-0">
               {/*TITULO*/}
               <div className="flex items-center gap-[0.375rem]">
                 <div className="relative h-8 w-8 ">

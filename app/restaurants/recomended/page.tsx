@@ -1,5 +1,6 @@
 import Header from "@/app/_components/header";
 import RestaurantItem from "@/app/_components/restaurant-item";
+import { Separator } from "@/app/_components/ui/separator";
 import { authOptions } from "@/app/_lib/auth";
 import { db } from "@/app/_lib/prisma";
 import { getServerSession } from "next-auth";
@@ -17,7 +18,10 @@ const RecomendedRestaurants = async () => {
   const restaurants = await db.restaurant.findMany({});
   return (
     <>
-      <Header isSearch={true} />
+      <div className="hidden w-full lg:flex">
+        <Header isSearch={true} />
+      </div>
+      <Separator className="mt-3 hidden lg:flex" />
       <div className="px-5 py-6">
         <h2 className="mb-6 text-lg font-semibold">
           Restaurantes Recomendados
