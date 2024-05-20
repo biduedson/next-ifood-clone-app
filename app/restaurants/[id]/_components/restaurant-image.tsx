@@ -34,7 +34,7 @@ const RestaurantImage = ({
 
   const handleBackclick = () => router.back();
   return (
-    <div className="relative h-[250px] w-full">
+    <div className="relative h-[250px] w-full lg:h-[380px] lg:w-[750px] xl:h-[480px] xl:w-[1280px]">
       <Image
         src={restaurant.imageUrl}
         alt={restaurant.name}

@@ -146,15 +146,6 @@ const Header = () => {
           </SheetContent>
         </Sheet>
       </div>
-      <div className="relative hidden h-[500px] w-full lg:block">
-        {/* No image do next/link sempre que uso fill ela vai ocupar 100% da imagem ta tag pai dele desde que esta esteja como relative*/}
-        <Image
-          src="/Banner_Ofertas.png"
-          alt="Fsw Foods"
-          fill
-          className="object-cover"
-        />
-      </div>
     </>
   );
 };

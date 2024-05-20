@@ -8,6 +8,7 @@ import { db } from "./_lib/prisma";
 import PromoBanner from "./_components/promo-banner";
 import RestaurantList from "./_components/restaurant-list";
 import Link from "next/link";
+import getConfig from "next/config";
 
 const fetch = async () => {
   const getProducts = await db.product.findMany({
@@ -49,6 +50,11 @@ const fetch = async () => {
 
 const Home = async () => {
   const { products, burguersCategory, pizzasCategory } = await fetch();
+  const { serverRuntimeConfig } = getConfig();
+
+  if (serverRuntimeConfig.decimalWarning === false) {
+    console.warn = () => {};
+  }
   return (
     <>
       <Header />
@@ -58,7 +64,7 @@ const Home = async () => {
           <Search />
         </div>
 
-        <div className=" xl:px-26 lg:space-y-6 lg:px-12 2xl:px-28">
+        <div className=" lg:space-y-6 lg:px-12 xl:px-24 2xl:px-28">
           <div className="pt-6">
             <CategoryList />
           </div>
@@ -90,8 +96,8 @@ const Home = async () => {
             <ProductList products={products} />
           </div>
 
-          <div className="hidden justify-center gap-8 lg:flex ">
-            <div className="">
+          <div className="hidden w-full  justify-between gap-8  lg:flex  ">
+            <div className="w-full">
               <Link href={`/categories/${pizzasCategory?.id}/products`}>
                 <PromoBanner
                   src="/promo-banner-01.png"
@@ -100,7 +106,7 @@ const Home = async () => {
               </Link>
             </div>
 
-            <div className="">
+            <div className="w-full">
               <Link href={`/categories/${burguersCategory?.id}/products`}>
                 <PromoBanner
                   src="/promo-banner-02.png"

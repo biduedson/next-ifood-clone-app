@@ -54,7 +54,9 @@
   }
 
   body {
-    @apply  text-foreground antialiased ;
+    @apply  text-foreground antialiased max-w-[1980px] m-auto;
   }
+  
 
+  
 }

@@ -1,4 +1,3 @@
-"use client";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import { calculateProductTotalPrice, formatCurrency } from "../_helpers/price";
@@ -23,13 +22,13 @@ const ProductItem = ({ product, className }: ProductsItemProps) => {
   return (
     <Link
       className={cn(
-        "w-[150px] min-w-[150px] px-0 lg:w-[180px] lg:min-w-[180px]",
+        "w-[150px] min-w-[150px] px-0 lg:w-[135px] lg:min-w-[135px]",
         className,
       )}
       href={`/products/${product.id}`}
     >
       <div className="w-full space-y-2">
-        <div className="relative aspect-square w-full">
+        <div className="relative aspect-square w-full lg:w-[135px] xl:w-[155px]  2xl:w-[180px]">
           {/* IMAGEN*/}
           <Image
             src={product.imageUrl}
