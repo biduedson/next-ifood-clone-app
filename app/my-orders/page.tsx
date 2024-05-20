@@ -26,7 +26,7 @@ const MyOrdersPage = async () => {
   });
   return (
     <>
-      <Header />
+      <Header isSearch={true} />
       <div className="px-6 py-6">
         <h2 className="pb-6 text-lg font-semibold">Meus Pedidos</h2>
         <div className="space-y-4">

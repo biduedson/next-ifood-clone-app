@@ -22,7 +22,7 @@ const MyFavoriteRestaurants = async () => {
   });
   return (
     <>
-      <Header />
+      <Header isSearch={true} />
       <div className="px-5 py-6">
         <h2 className="mb-6 text-lg font-semibold">Restaurantes Favoritos</h2>
         <div className="flex w-full flex-col gap-6 ">
