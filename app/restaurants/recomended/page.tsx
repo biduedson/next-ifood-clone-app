@@ -17,7 +17,7 @@ const RecomendedRestaurants = async () => {
   const restaurants = await db.restaurant.findMany({});
   return (
     <>
-      <Header />
+      <Header isSearch={true} />
       <div className="px-5 py-6">
         <h2 className="mb-6 text-lg font-semibold">
           Restaurantes Recomendados
