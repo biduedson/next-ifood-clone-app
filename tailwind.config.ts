@@ -24,9 +24,12 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        customRed: 'hsla(356, 83%, 52%, 1)',
+        customRedSecondary: 'hsla(0, 0%, 79%, 1)',
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          red:"hsla(var(--primary-red))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

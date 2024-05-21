@@ -9,6 +9,7 @@ import PromoBanner from "./_components/promo-banner";
 import RestaurantList from "./_components/restaurant-list";
 import Link from "next/link";
 import getConfig from "next/config";
+import Image from "next/image";
 
 const fetch = async () => {
   const getProducts = await db.product.findMany({
@@ -58,12 +59,37 @@ const Home = async () => {
   return (
     <>
       <Header isSearch={false} />
-
-      <div className="px-5">
-        <div className="px-5 pt-6">
-          <Search />
+      <div className="px-5 pt-5 lg:hidden">
+        <Search />
+      </div>
+      <div className="relative hidden h-[500px] w-full  bg-customRed lg:flex">
+        <div className="absolute top-24 lg:left-14 xl:left-24">
+          <div className="mb-4">
+            <h1 className="text-[38px] font-bold text-white xl:text-[48px] ">
+              Está com fome?
+            </h1>
+            <p className="text-sm font-light text-white xl:text-lg">
+              Com apenas alguns cliques, encontre refeições acessíveis perto de
+              você.
+            </p>
+          </div>
+          <div className="flex h-[75px] flex-col items-center justify-center rounded-[10px] bg-white lg:w-[568px] xl:w-[668px] ">
+            <Search />
+          </div>
         </div>
-
+        <div className="absolute right-0 lg:bottom-[-93px] xl:bottom-[-53px]">
+          <div className=" relative h-[540px] w-[530px] xl:h-[540px] xl:w-[650px]">
+            <Image
+              src="/hand-food-image-2.png"
+              alt="hero image"
+              fill
+              quality={100}
+              className="object-contain"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="px-5">
         <div className=" lg:space-y-6 lg:px-12 xl:px-24 2xl:px-28">
           <div className="pt-6">
             <CategoryList />

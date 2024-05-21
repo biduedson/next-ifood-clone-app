@@ -33,7 +33,7 @@ const Header = ({ isSearch }: IHeaderProps) => {
   const handleSignInClick = () => signIn();
   return (
     <>
-      <div className="flex w-full justify-between px-5 pt-6 lg:h-[80px] lg:items-center">
+      <div className="flex w-full justify-between px-5 pt-6 lg:h-[80px] lg:items-center lg:px-20 ">
         <div className="relative h-[30px] w-[100px]">
           <Link href="/">
             {/* No image do next/link sempre que uso fill ela vai ocupar 100% da imagem ta tag pai dele desde que esta esteja como relative*/}
