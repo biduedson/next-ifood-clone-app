@@ -4,13 +4,7 @@ import { notFound } from "next/navigation";
 import { db } from "../_lib/prisma";
 import Header from "../_components/header";
 import RestaurantItem from "../_components/restaurant-item";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../_components/ui/carousel";
+import { Separator } from "../_components/ui/separator";
 
 const MyFavoriteRestaurants = async () => {
   const session = await getServerSession(authOptions);
@@ -30,48 +24,27 @@ const MyFavoriteRestaurants = async () => {
   return (
     <>
       <Header isSearch={true} />
-      <div className="px-5 py-6 lg:px-12 xl:px-24 2xl:px-28">
-        <h2 className="mb-6 text-lg font-semibold">Restaurantes Favoritos</h2>
-        <div className="flex w-full flex-col gap-6 lg:hidden">
-          {userFavoriterestaurants.length > 0 ? (
-            userFavoriterestaurants.map(
-              (
-                { restaurant }, //restaurant sendo desestruturado do userFavoriterestaurants
-              ) => (
-                <RestaurantItem
-                  key={restaurant.id}
-                  restaurant={restaurant}
-                  userFavoriteRestaurants={userFavoriterestaurants}
-                  className="min-w-full max-w-full"
-                />
-              ),
-            )
-          ) : (
-            <h1 className="text-sm font-medium">
-              Você ainda não marcou nenhum restaurante como favorito.
-            </h1>
-          )}
-        </div>
+      <Separator className="mt-3 hidden lg:flex" />
 
-        {userFavoriterestaurants.length > 0 && (
-          <Carousel className=" hidden   lg:block ">
-            <CarouselContent>
-              {userFavoriterestaurants.map(({ restaurant }) => (
-                <CarouselItem key={restaurant.id} className="lg:basis-1/3 ">
-                  <RestaurantItem
-                    key={restaurant.id}
-                    restaurant={restaurant}
-                    userId={session?.user?.id}
-                    userFavoriteRestaurants={userFavoriterestaurants}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        )}
-      </div>
+      {userFavoriterestaurants.length > 0 ? (
+        <div className="px-5 py-6 lg:px-12 xl:px-24 2xl:px-28">
+          <h2 className="mb-6 text-lg font-semibold">
+            Restaurantes Recomendados
+          </h2>
+          <div className="flex w-full flex-col gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3 ">
+            {userFavoriterestaurants.map((restaurant) => (
+              <RestaurantItem
+                key={restaurant.restaurant.id}
+                restaurant={restaurant.restaurant}
+                className="min-w-full max-w-full"
+                userFavoriteRestaurants={userFavoriterestaurants}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <h1>Você ainda não incluiu nehum restaurante como favorito.</h1>
+      )}
     </>
   );
 };

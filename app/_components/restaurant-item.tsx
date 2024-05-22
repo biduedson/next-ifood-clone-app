@@ -36,6 +36,8 @@ const RestaurantItem = ({
   const { data } = useSession();
   const [showMessage, setShowMessage] = useState(false);
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [isSubmitLoading, setIsSubmiLoading] = useState(false);
 
   const isFavorite = userFavoriteRestaurants?.some(
     (favorite) => favorite.restaurantId === restaurant.id,
