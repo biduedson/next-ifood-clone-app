@@ -34,7 +34,7 @@ const Restaurants = ({ userFavoriteRestaurants }: IRestaurantsProps) => {
         <h2 className="mb-6 text-lg font-semibold">
           {restaurants.length === 0
             ? "Restaurante não encontrado"
-            : "Restaurantes Recomendados"}
+            : `Resultados para "${searchFor}"`}
         </h2>
         <div className="flex w-full flex-col gap-6 ">
           {restaurants.map((restaurant) => (
