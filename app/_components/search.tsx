@@ -30,7 +30,7 @@ const Search = ({ YellowButton }: ISearchProps) => {
     <form className="flex gap-2" onSubmit={handleSearcSubmit}>
       <Input
         placeholder="Buscar Restaurantes"
-        className="border-none  md:w-[350px]  lg:w-[600px]"
+        className="border-none  md:w-[350px]  lg:w-[500px]"
         onChange={handleChange}
         value={search}
       />
