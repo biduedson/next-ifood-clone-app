@@ -111,7 +111,7 @@ const Home = async () => {
               <Button
                 variant="ghost"
                 className="h-fit p-0 text-primary hover:bg-transparent"
-                asChild //as child esta opçãp do shadcn vai pegar toda configuração do css e jogar para o elemento filho  no caso ai o link
+                asChild //as child esta opçãp do shadcn vai pegar toda configuração do css e jogar para o elemento filho no caso ai o link
               >
                 <Link href="/products/recomended">
                   Ver todos
