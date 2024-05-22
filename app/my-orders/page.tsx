@@ -27,7 +27,7 @@ const MyOrdersPage = async () => {
   return (
     <>
       <Header isSearch={true} />
-      <div className="px-6 py-6">
+      <div className="px-6 py-6 lg:px-12 xl:px-24 2xl:px-28">
         <h2 className="pb-6 text-lg font-semibold">Meus Pedidos</h2>
         <div className="space-y-4">
           {orders.map((order) => (

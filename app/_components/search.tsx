@@ -5,7 +5,12 @@ import { Input } from "./ui/input";
 import React, { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const Search = () => {
+interface ISearchProps {
+  YellowButton?: boolean;
+}
+
+const Search = ({ YellowButton }: ISearchProps) => {
+  console.log(YellowButton);
   const router = useRouter();
   const [search, setSearch] = useState("");
 
@@ -29,7 +34,7 @@ const Search = () => {
         onChange={handleChange}
         value={search}
       />
-      <Button size="icon" type="submit">
+      <Button size="icon" type="submit" className="z-50">
         <SearchIcon size={18} />
       </Button>
     </form>

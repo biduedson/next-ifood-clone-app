@@ -10,6 +10,16 @@ import { toggleFavoriteRestaurant } from "../_actions/restaurant";
 import { toast } from "sonner";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
 
 interface RestaurantItemProps {
   userId?: string;
@@ -25,12 +35,18 @@ const RestaurantItem = ({
 }: RestaurantItemProps) => {
   const { data } = useSession();
   const [showMessage, setShowMessage] = useState(false);
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+
   const isFavorite = userFavoriteRestaurants?.some(
     (favorite) => favorite.restaurantId === restaurant.id,
   );
 
+  const openCloseDialog = () => {
+    setIsConfirmDialogOpen(!isConfirmDialogOpen);
+  };
   const handleFavoriteClick = async () => {
     if (!data?.user.id) return;
+    setIsSubmiLoading(true);
 
     try {
       await toggleFavoriteRestaurant(data.user.id, restaurant.id);
@@ -38,9 +54,14 @@ const RestaurantItem = ({
         isFavorite
           ? "Restaurante removido dos seus favoritos."
           : "Restaurante adicionado aos seus favoritos.",
+        {
+          duration: 1200,
+        },
       );
     } catch (error) {
       toast.error("Erro ao favoritar restaurante.");
+    } finally {
+      setIsConfirmDialogOpen(false);
     }
   };
   return (
@@ -79,7 +100,7 @@ const RestaurantItem = ({
           {data?.user.id && (
             <div
               className={`absolute right-2 top-2 flex h-7 w-7 cursor-pointer  items-center justify-center rounded-full  ${isFavorite ? "bg-red-700" : "bg-gray-500 hover:bg-gray-700 "} `}
-              onClick={handleFavoriteClick}
+              onClick={openCloseDialog}
               onMouseLeave={() => setShowMessage(false)}
               onMouseEnter={() => setShowMessage(true)}
             >
@@ -112,6 +133,31 @@ const RestaurantItem = ({
           </div>
         </div>
       </div>
+      <AlertDialog
+        open={isConfirmDialogOpen}
+        onOpenChange={setIsConfirmDialogOpen}
+      >
+        <AlertDialogContent className="lg:flex lg:h-[179px] lg:w-[318px] lg:flex-col lg:items-center">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-center">
+              {isFavorite ? "Remover restaurante" : "Adicionar restaurante"}
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-center">
+              {isFavorite
+                ? "Tem certeza que deseja remover esse restaurante dos favoritos?"
+                : "Tem certeza que deseja adicionar esse restaurante aos favoritos?"}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={openCloseDialog}>
+              Cancelar
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleFavoriteClick}>
+              {isFavorite ? " Remover" : " Adicionar"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

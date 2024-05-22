@@ -9,8 +9,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
+interface IRestaurantListProps {
+  category?: string;
+}
 
-const RestaurantList = async () => {
+const RestaurantList = async ({ category }: IRestaurantListProps) => {
   //TODO pegar restaurantes com maior numewro de pedidos
   const session = await getServerSession(authOptions);
 
@@ -19,6 +22,16 @@ const RestaurantList = async () => {
   });
   const restaurants = await db.restaurant.findMany({
     take: 10,
+  });
+
+  const restaurantsCategory = await db.restaurant.findMany({
+    where: {
+      categories: {
+        some: {
+          name: category,
+        },
+      },
+    },
   });
 
   return (
@@ -36,16 +49,27 @@ const RestaurantList = async () => {
       <>
         <Carousel className=" hidden w-full lg:block ">
           <CarouselContent>
-            {restaurants.map((restaurant) => (
-              <CarouselItem key={restaurant.id} className="lg:basis-1/3 ">
-                <RestaurantItem
-                  key={restaurant.id}
-                  restaurant={restaurant}
-                  userId={session?.user?.id}
-                  userFavoriteRestaurants={userFavorites}
-                />
-              </CarouselItem>
-            ))}
+            {restaurantsCategory
+              ? restaurantsCategory.map((restaurant) => (
+                  <CarouselItem key={restaurant.id} className="lg:basis-1/3 ">
+                    <RestaurantItem
+                      key={restaurant.id}
+                      restaurant={restaurant}
+                      userId={session?.user?.id}
+                      userFavoriteRestaurants={userFavorites}
+                    />
+                  </CarouselItem>
+                ))
+              : restaurants.map((restaurant) => (
+                  <CarouselItem key={restaurant.id} className="lg:basis-1/3 ">
+                    <RestaurantItem
+                      key={restaurant.id}
+                      restaurant={restaurant}
+                      userId={session?.user?.id}
+                      userFavoriteRestaurants={userFavorites}
+                    />
+                  </CarouselItem>
+                ))}
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />

@@ -26,6 +26,7 @@ const config = {
         foreground: "hsl(var(--foreground))",
         customRed: 'hsla(356, 83%, 52%, 1)',
         customRedSecondary: 'hsla(0, 0%, 79%, 1)',
+        custonYwellow: '#FFB100',
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

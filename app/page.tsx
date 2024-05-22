@@ -60,7 +60,7 @@ const Home = async () => {
     <>
       <Header isSearch={false} />
       <div className="px-5 pt-5 lg:hidden">
-        <Search />
+        <Search YellowButton={true} />
       </div>
       <div className="relative hidden h-[500px] w-full  bg-customRed lg:flex">
         <div className="absolute top-24 lg:left-14 xl:left-24">
