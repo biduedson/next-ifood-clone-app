@@ -106,7 +106,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             </p>
           </div>
           <div className="hidden lg:flex">
-            <AddProductToCart product={product} />
+            <AddProductToCart product={product} quantity={quantity} />
           </div>
         </div>
       </div>

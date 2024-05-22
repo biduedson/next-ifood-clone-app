@@ -29,10 +29,10 @@ interface AddProductToCartProps {
       restaurant: true;
     };
   }>;
+  quantity: number;
 }
 
-const AddProductToCart = ({ product }: AddProductToCartProps) => {
-  const [quantity, setQuantity] = useState(1);
+const AddProductToCart = ({ product, quantity }: AddProductToCartProps) => {
   const [isCArtOpen, setIsCartOpen] = useState(false);
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
