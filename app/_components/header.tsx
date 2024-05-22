@@ -21,6 +21,17 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import Search from "./search";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
+import { useState } from "react";
 
 interface IHeaderProps {
   isSearch: boolean;
@@ -31,6 +42,11 @@ const Header = ({ isSearch }: IHeaderProps) => {
 
   const handleSignOutClick = () => signOut();
   const handleSignInClick = () => signIn();
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+  const openCloseDialog = () => {
+    setIsConfirmDialogOpen(!isConfirmDialogOpen);
+  };
+
   return (
     <>
       <div className="flex w-full justify-between px-5 pt-6 lg:h-[80px] lg:items-center  lg:px-12 xl:px-24 2xl:px-28 ">
@@ -47,7 +63,7 @@ const Header = ({ isSearch }: IHeaderProps) => {
         </div>
 
         {isSearch && (
-          <div className="lg:flex lg:w-[600px]">
+          <div className="hidden md:flex md:w-[350px] lg:w-[600px]">
             <Search />
           </div>
         )}
@@ -147,7 +163,7 @@ const Header = ({ isSearch }: IHeaderProps) => {
               <Button
                 variant="ghost"
                 className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
-                onClick={handleSignOutClick}
+                onClick={openCloseDialog}
               >
                 <LogOutIcon size={16} />
                 <span className="block">Sair da Conta</span>
@@ -156,6 +172,35 @@ const Header = ({ isSearch }: IHeaderProps) => {
           </SheetContent>
         </Sheet>
       </div>
+      <AlertDialog
+        open={isConfirmDialogOpen}
+        onOpenChange={setIsConfirmDialogOpen}
+      >
+        <AlertDialogContent className="lg:flex lg:h-[179px] lg:w-[318px] lg:flex-col lg:items-center">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-center">
+              Sair da conta
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-center">
+              Deseja mesmo sair da plataforma
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel
+              onClick={openCloseDialog}
+              className="lg:h-[45px] lg:w-[133px]"
+            >
+              Cancelar
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleSignOutClick}
+              className="lg:h-[45px] lg:w-[133px]"
+            >
+              Sair
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 };

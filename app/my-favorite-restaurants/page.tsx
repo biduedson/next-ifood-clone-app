@@ -28,9 +28,7 @@ const MyFavoriteRestaurants = async () => {
 
       {userFavoriterestaurants.length > 0 ? (
         <div className="px-5 py-6 lg:px-12 xl:px-24 2xl:px-28">
-          <h2 className="mb-6 text-lg font-semibold">
-            Restaurantes Recomendados
-          </h2>
+          <h2 className="mb-6 text-lg font-semibold">Restaurantes favoritos</h2>
           <div className="flex w-full flex-col gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3 ">
             {userFavoriterestaurants.map((restaurant) => (
               <RestaurantItem
@@ -43,7 +41,9 @@ const MyFavoriteRestaurants = async () => {
           </div>
         </div>
       ) : (
-        <h1>Você ainda não incluiu nehum restaurante como favorito.</h1>
+        <h1 className="px-5 py-6 text-sm font-bold lg:px-12 xl:px-24 2xl:px-28">
+          Você ainda não incluiu nehum restaurante como favorito.
+        </h1>
       )}
     </>
   );
