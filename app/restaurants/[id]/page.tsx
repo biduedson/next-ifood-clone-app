@@ -81,7 +81,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
           />
 
           <div className="lg:flex lg:h-[380px] lg:w-[402px] lg:flex-col  ">
-            <div className="relative z-50 mt-[-1.5rem] flex items-center justify-between rounded-tl-3xl rounded-tr-3xl  bg-transparent px-5 pt-5 lg:px-0">
+            <div className="relative z-50 mt-[-1.5rem] flex items-center justify-between rounded-tl-3xl rounded-tr-3xl bg-white px-5 pt-5 lg:px-0">
               {/*TITULO*/}
               <div className="flex items-center gap-[0.375rem]">
                 <div className="relative h-8 w-8 ">
@@ -109,9 +109,9 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
             <div className="desktop hidden w-full lg:block">
               <Deliveryinfo restaurant={restaurant} />
             </div>
-            <div className="relative h-[65px] w-full overflow-y-scroll pb-1 [&::-webkit-scrollbar]:hidden">
+            <div className="relative w-full overflow-y-scroll pb-1 lg:h-[65px] [&::-webkit-scrollbar]:hidden">
               <p
-                className={`${restaurant.categories.length > 0 ? "absolute right-1 top-3 animate-bounce" : "hidden"}`}
+                className={`${restaurant.categories.length > 0 ? "absolute right-1 top-3 hidden animate-bounce lg:block" : "hidden"}`}
               >
                 &darr;
               </p>
@@ -161,10 +161,12 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
           ))}
         </div>
 
-        <div className="mt-6  w-full  space-y-4 px-5 lg:px-0 ">
+        <div className="mt-6  w-full  space-y-4  lg:px-0 ">
           {/*TODO mostrar produtos mais pedidos quando implementarmos a realização de  pedidos */}
           <div className="flex w-full justify-between">
-            <h2 className="px-5 font-semibold lg:px-0">Pedidos Recomendados</h2>
+            <h2 className=" px-5 font-semibold lg:px-0">
+              Pedidos Recomendados
+            </h2>
 
             <Button
               variant="ghost"
@@ -181,7 +183,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
         </div>
 
         {restaurant.categories.map((category) => (
-          <div className="mt-6 w-full space-y-4 px-5 lg:px-0" key={category.id}>
+          <div className="mt-6 w-full space-y-4  lg:px-0" key={category.id}>
             <h2 className="px-5 font-semibold lg:px-0">{category.name}</h2>
             <ProductList products={category.products} />
           </div>
