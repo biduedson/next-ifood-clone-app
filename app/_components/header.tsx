@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import {
   HeartIcon,
   HomeIcon,
+  LayoutDashboardIcon,
   LogInIcon,
   LogOutIcon,
   MenuIcon,
@@ -151,6 +152,17 @@ const Header = ({ isSearch }: IHeaderProps) => {
                     <Link href="/my-favorite-restaurants">
                       <HeartIcon size={16} />
                       <span className="block">Restaurantes Favoritos</span>
+                    </Link>
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                    asChild
+                  >
+                    <Link href="/my-restaurant">
+                      <LayoutDashboardIcon size={16} />
+                      <span className="block">Meus Restaurantes</span>
                     </Link>
                   </Button>
                 </>
