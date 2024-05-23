@@ -14,6 +14,7 @@ interface ProductPageProps {
 }
 
 const ProductPage = async ({ params: { id } }: ProductPageProps) => {
+  const quantity = 1;
   const product = await db.product.findUnique({
     where: {
       id,
@@ -52,14 +53,14 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
           <ProductImage product={product} />
 
           {/* TITULO E PREÇO */}
-          <ProductDetails product={product} />
+          <ProductDetails product={product} complementaryProducts={juices} />
         </div>
-        <div className="mb-2 mt-6 space-y-3 px-5 lg:px-0">
-          <h3 className="font-semibold">Pedidos Recomendados</h3>
+        <div className="mb-2 mt-6 hidden flex-col space-y-3 px-5 lg:flex lg:px-0">
+          <h3 className="font-semibold">Sucos</h3>
           <ProductList products={juices} />
         </div>
-        <div className="lg:hidden">
-          <AddProductToCart product={product} />
+        <div className="hidden py-2">
+          <AddProductToCart product={product} quantity={quantity} />
         </div>
       </div>
     </>
