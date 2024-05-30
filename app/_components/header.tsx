@@ -76,7 +76,7 @@ const Header = ({ isSearch }: IHeaderProps) => {
           console.error("Failed to fetch restaurant ID:", error);
         }
       }
-      setTimeout(() => setLoading(false), 500); // Delay de 300 milissegundos
+      setTimeout(() => setLoading(false), 11500); // Delay de 300 milissegundos
     };
 
     fetchRestaurant();
