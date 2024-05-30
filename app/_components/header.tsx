@@ -75,7 +75,7 @@ const Header = ({ isSearch }: IHeaderProps) => {
           console.error("Failed to fetch restaurant ID:", error);
         }
       }
-      setLoading(false);
+      setTimeout(() => setLoading(false), 300); // Delay de 300 milissegundos
     };
 
     fetchRestaurant();
@@ -190,7 +190,9 @@ const Header = ({ isSearch }: IHeaderProps) => {
 
                   {loading ? (
                     <div className="flex justify-center">
-                      <div className="loader"></div>
+                      <span className="block animate-pulse">
+                        Meu Restaurante
+                      </span>
                     </div>
                   ) : idRestaurant ? (
                     <Button
