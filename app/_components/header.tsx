@@ -5,6 +5,7 @@ import {
   HeartIcon,
   HomeIcon,
   LayoutDashboardIcon,
+  LoaderIcon,
   LogInIcon,
   LogOutIcon,
   MenuIcon,
@@ -75,7 +76,7 @@ const Header = ({ isSearch }: IHeaderProps) => {
           console.error("Failed to fetch restaurant ID:", error);
         }
       }
-      setTimeout(() => setLoading(false), 300); // Delay de 300 milissegundos
+      setTimeout(() => setLoading(false), 500); // Delay de 300 milissegundos
     };
 
     fetchRestaurant();
@@ -189,9 +190,10 @@ const Header = ({ isSearch }: IHeaderProps) => {
                   </Button>
 
                   {loading ? (
-                    <div className="flex justify-center">
-                      <span className="block animate-pulse">
-                        Meu Restaurante
+                    <div className="flex ">
+                      <span className="flex w-full justify-start gap-1 space-x-3 rounded-full text-sm font-normal ">
+                        <LoaderIcon className="animate-spin" />
+                        Loading..
                       </span>
                     </div>
                   ) : idRestaurant ? (
