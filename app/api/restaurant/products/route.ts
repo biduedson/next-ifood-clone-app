@@ -4,9 +4,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 
-export async function GET(req:Request){
-    const {searchParams} = new URL(req.url)
-        const ownerId = searchParams.get('ownerId')
+export async function GET(){
     const data = await getServerSession(authOptions);
 
     if(!data){

@@ -1,10 +1,7 @@
 import { authOptions } from "@/app/_lib/auth";
 import { db } from "@/app/_lib/prisma";
 import { getServerSession } from "next-auth";
-import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-
-
 
 
 export async function  DELETE(req: Request) {
@@ -14,7 +11,6 @@ export async function  DELETE(req: Request) {
         const idProduct = searchParams.get('id')
         const data = await getServerSession(authOptions);
 
-        console.log(idProduct)
     
     if(req.method !== "DELETE"){
       return NextResponse.json({message: "Metodo incorreto" })  
@@ -48,6 +44,14 @@ export async function  DELETE(req: Request) {
             products: true, // Inclui os produtos associados ao restaurante, se necessário
           },
     })
+
+    if(!restaurantProduct){
+        return NextResponse.json({message: "Não autorizado" } , { status: 401} )
+    }
+
+    if(restaurantProduct.ownerId !== data.user.id){
+        return NextResponse.json({message: "Não autorizado" } , { status: 401})
+    }
        
     const restaurant = await db.restaurant.findFirst({
         where:{
@@ -78,7 +82,6 @@ export async function  DELETE(req: Request) {
         return NextResponse.json({message:"Não autorizado."} , { status: 401 })
     }
     
-
     await db.product.delete({
         where: {
           id: idProduct,
