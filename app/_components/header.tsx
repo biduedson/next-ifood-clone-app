@@ -60,7 +60,8 @@ const Header = ({ isSearch }: IHeaderProps) => {
     };
 
     fetchRestaurant();
-  }, [data]);
+  }, [data, idRestaurant]);
+
   return (
     <>
       <div className="flex w-full justify-between px-5 pt-6 lg:h-[80px] lg:items-center  lg:px-12 xl:px-24 2xl:px-28 ">
@@ -168,7 +169,7 @@ const Header = ({ isSearch }: IHeaderProps) => {
                     </Link>
                   </Button>
 
-                  {idRestaurant && (
+                  {idRestaurant ? (
                     <Button
                       variant="ghost"
                       className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
@@ -177,6 +178,17 @@ const Header = ({ isSearch }: IHeaderProps) => {
                       <Link href={`/dashboard/${idRestaurant}`}>
                         <LayoutDashboardIcon size={16} />
                         <span className="block">Meu Restaurante</span>
+                      </Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                      asChild
+                    >
+                      <Link href="/">
+                        <LayoutDashboardIcon size={16} />
+                        <span className="block">Cadastre Seu restaurante</span>
                       </Link>
                     </Button>
                   )}
