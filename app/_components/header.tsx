@@ -34,6 +34,7 @@ import {
 } from "./ui/alert-dialog";
 import { useEffect, useState } from "react";
 import _api from "../api/_api";
+import { useRouter } from "next/navigation";
 
 interface IHeaderProps {
   isSearch: boolean;
@@ -41,8 +42,15 @@ interface IHeaderProps {
 
 const Header = ({ isSearch }: IHeaderProps) => {
   const { data } = useSession();
-  const [idRestaurant, setIdRestaurant] = useState("");
-  const handleSignOutClick = () => signOut();
+  const [idRestaurant, setIdRestaurant] = useState<string | null | undefined>(
+    null,
+  );
+  const router = useRouter();
+  const handleSignOutClick = () => {
+    signOut().then(() => {
+      router.replace("/");
+    });
+  };
   const handleSignInClick = () => signIn();
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const openCloseDialog = () => {
@@ -60,7 +68,7 @@ const Header = ({ isSearch }: IHeaderProps) => {
     };
 
     fetchRestaurant();
-  }, [data, idRestaurant]);
+  }, [data]);
 
   return (
     <>
