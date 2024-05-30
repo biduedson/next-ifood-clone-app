@@ -59,20 +59,21 @@ const Header = ({ isSearch }: IHeaderProps) => {
 
   useEffect(() => {
     const fetchRestaurant = async () => {
-      const id = await _api.get("/myRestaurantId");
       if (data?.user?.id) {
-        if (id.data) {
-          setIdRestaurant(id.data);
+        try {
+          const response = await _api.get("/myRestaurantId");
+          if (response.data) {
+            setIdRestaurant(response.data);
+          }
+        } catch (error) {
+          console.error("Failed to fetch restaurant ID:", error);
         }
       }
     };
 
     fetchRestaurant();
-  }, [data, idRestaurant]);
+  }, [data]);
 
-  if (!idRestaurant) {
-    return <div className="animate-pulse">Loading....</div>;
-  }
   return (
     <>
       <div className="flex w-full justify-between px-5 pt-6 lg:h-[80px] lg:items-center  lg:px-12 xl:px-24 2xl:px-28 ">
