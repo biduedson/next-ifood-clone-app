@@ -32,7 +32,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "./ui/alert-dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import _api from "../api/_api";
 
 interface IHeaderProps {
   isSearch: boolean;
@@ -40,7 +41,7 @@ interface IHeaderProps {
 
 const Header = ({ isSearch }: IHeaderProps) => {
   const { data } = useSession();
-
+  const [idRestaurant, setIdRestaurant] = useState("");
   const handleSignOutClick = () => signOut();
   const handleSignInClick = () => signIn();
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
@@ -48,6 +49,18 @@ const Header = ({ isSearch }: IHeaderProps) => {
     setIsConfirmDialogOpen(!isConfirmDialogOpen);
   };
 
+  useEffect(() => {
+    const fetchRestaurant = async () => {
+      if (data?.user?.id) {
+        const idRestaurant = await _api.get("/myRestaurantId");
+        if (idRestaurant.data) {
+          setIdRestaurant(idRestaurant.data);
+        }
+      }
+    };
+
+    fetchRestaurant();
+  }, [data]);
   return (
     <>
       <div className="flex w-full justify-between px-5 pt-6 lg:h-[80px] lg:items-center  lg:px-12 xl:px-24 2xl:px-28 ">
@@ -155,16 +168,18 @@ const Header = ({ isSearch }: IHeaderProps) => {
                     </Link>
                   </Button>
 
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
-                    asChild
-                  >
-                    <Link href="/my-restaurant">
-                      <LayoutDashboardIcon size={16} />
-                      <span className="block">Meus Restaurantes</span>
-                    </Link>
-                  </Button>
+                  {idRestaurant && (
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                      asChild
+                    >
+                      <Link href={`/dashboard/${idRestaurant}`}>
+                        <LayoutDashboardIcon size={16} />
+                        <span className="block">Meu Restaurante</span>
+                      </Link>
+                    </Button>
+                  )}
                 </>
               )}
             </div>

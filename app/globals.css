@@ -54,8 +54,8 @@
     @apply box-border;
   }
 
-  body {
-    @apply  text-foreground antialiased max-w-[1980px] m-auto;
+  body, html {
+    @apply  text-foreground antialiased max-w-[1980px] h-full m-auto;
   }
   
 

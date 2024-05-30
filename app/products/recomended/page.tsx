@@ -22,7 +22,7 @@ const RecomendeProductsPage = async () => {
   });
   return (
     <>
-      <div className="hidden w-full lg:flex">
+      <div className="w-full lg:flex">
         <Header isSearch={true} />
       </div>
       <Separator className="mt-3 hidden lg:flex" />
