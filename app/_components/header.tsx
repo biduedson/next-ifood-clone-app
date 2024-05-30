@@ -59,17 +59,20 @@ const Header = ({ isSearch }: IHeaderProps) => {
 
   useEffect(() => {
     const fetchRestaurant = async () => {
+      const id = await _api.get("/myRestaurantId");
       if (data?.user?.id) {
-        const idRestaurant = await _api.get("/myRestaurantId");
-        if (idRestaurant.data) {
-          setIdRestaurant(idRestaurant.data);
+        if (id.data) {
+          setIdRestaurant(id.data);
         }
       }
     };
 
     fetchRestaurant();
-  }, [data]);
+  }, [data, idRestaurant]);
 
+  if (!idRestaurant) {
+    return <div className="animate-pulse">Loading....</div>;
+  }
   return (
     <>
       <div className="flex w-full justify-between px-5 pt-6 lg:h-[80px] lg:items-center  lg:px-12 xl:px-24 2xl:px-28 ">

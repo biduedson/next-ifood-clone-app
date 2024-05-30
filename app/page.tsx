@@ -56,6 +56,7 @@ const Home = async () => {
   if (serverRuntimeConfig.decimalWarning === false) {
     console.warn = () => {};
   }
+
   return (
     <>
       <Header isSearch={false} />
