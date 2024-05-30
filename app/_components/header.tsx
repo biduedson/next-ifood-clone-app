@@ -81,7 +81,7 @@ const Header = ({ isSearch }: IHeaderProps) => {
 
     fetchRestaurant();
   }, [data]);
-
+  setTimeout(() => setLoading(false), 11500); // Delay de 300 milissegundos
   return (
     <>
       <div className="flex w-full justify-between px-5 pt-6 lg:h-[80px] lg:items-center  lg:px-12 xl:px-24 2xl:px-28 ">
