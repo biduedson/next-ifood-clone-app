@@ -42,7 +42,7 @@ interface IHeaderProps {
 }
 
 const Header = ({ isSearch }: IHeaderProps) => {
-  const { data } = useSession();
+  const { data, status } = useSession();
   const [idRestaurant, setIdRestaurant] = useState<string | null | undefined>(
     null,
   );
@@ -81,6 +81,11 @@ const Header = ({ isSearch }: IHeaderProps) => {
     fetchRestaurant();
   }, [data]);
   setTimeout(() => setLoading(false), 500); // Delay de 300 milissegundos
+  useEffect(() => {
+    console.log("Session status:", status);
+    console.log("Session data:", data);
+    console.log("Restaurant ID:", idRestaurant);
+  }, [data, idRestaurant, status]);
 
   return (
     <>
