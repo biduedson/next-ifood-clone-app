@@ -45,6 +45,8 @@ const Header = ({ isSearch }: IHeaderProps) => {
   const [idRestaurant, setIdRestaurant] = useState<string | null | undefined>(
     null,
   );
+  const [loading, setLoading] = useState(true);
+
   const router = useRouter();
   const handleSignOutClick = () => {
     signOut().then(() => {
@@ -61,14 +63,19 @@ const Header = ({ isSearch }: IHeaderProps) => {
     const fetchRestaurant = async () => {
       if (data?.user?.id) {
         try {
+          console.log("Fetching restaurant ID...");
           const response = await _api.get("/myRestaurantId");
           if (response.data) {
+            console.log("Restaurant ID fetched:", response.data);
             setIdRestaurant(response.data);
+          } else {
+            console.log("No restaurant ID found.");
           }
         } catch (error) {
           console.error("Failed to fetch restaurant ID:", error);
         }
       }
+      setLoading(false);
     };
 
     fetchRestaurant();
@@ -181,7 +188,11 @@ const Header = ({ isSearch }: IHeaderProps) => {
                     </Link>
                   </Button>
 
-                  {idRestaurant ? (
+                  {loading ? (
+                    <div className="flex justify-center">
+                      <div className="loader"></div>
+                    </div>
+                  ) : idRestaurant ? (
                     <Button
                       variant="ghost"
                       className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
