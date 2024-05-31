@@ -12,7 +12,6 @@ import Image from "next/image";
 import { formatCurrency } from "@/app/_helpers/price";
 import { EditIcon, TrashIcon } from "lucide-react";
 import ProductEditItemCard from "./product-edit-item-card";
-import _api from "@/app/api/_api";
 import { useState } from "react";
 
 interface ICrudProductListProps {
@@ -27,9 +26,19 @@ interface ICrudProductListProps {
 const CrudProductsList = ({ products }: ICrudProductListProps) => {
   const [currentProducts, setCurrentProducts] = useState(products);
   const deleteProduct = async (id: string) => {
-    const data = await _api.delete(`/product/?id=${id}`);
-    setCurrentProducts(currentProducts.filter((product) => product.id !== id));
-    return data;
+    try {
+      const data = await fetch(`/api/product/?id=${id}`, {
+        method: "DELETE",
+      });
+      setCurrentProducts(
+        currentProducts.filter((product) => product.id !== id),
+      );
+      const response = await data.json();
+
+      return response;
+    } catch (error) {
+      console.log("Erro interno do servidor: ", error);
+    }
   };
   return (
     <div className=" flex w-full flex-wrap items-center justify-center gap-2 overflow-y-auto bg-[#E5E5E5] lg:flex lg:flex-col">
@@ -88,7 +97,7 @@ const CrudProductsList = ({ products }: ICrudProductListProps) => {
           </TableBody>
         </Table>
       </div>
-      <div className="flex w-full flex-wrap items-center justify-center gap-2 lg:hidden">
+      <div className="flex w-full flex-wrap items-center  gap-2 lg:hidden">
         {currentProducts.map((product) => (
           <ProductEditItemCard
             key={product.id}

@@ -13,17 +13,17 @@ export async function  DELETE(req: Request) {
 
     
     if(req.method !== "DELETE"){
-      return NextResponse.json({message: "Metodo incorreto" })  
+      return NextResponse.json({message: "Metodo incorreto" }, { status: 401})  
     }
 
     //const {id} = req.body;
 
     if(!idProduct){
-        return NextResponse.json({message: "Id não informado" })
+        return NextResponse.json({message: "Id não informado" }, { status: 401})
     }
 
     if(!data || !data.user){
-        return NextResponse.json({message: "Usuário não autenticado" })
+        return NextResponse.json({message: "Usuário não autenticado" }, { status: 401})
     }
 
 
