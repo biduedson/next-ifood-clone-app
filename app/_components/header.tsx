@@ -34,7 +34,6 @@ import {
   AlertDialogTitle,
 } from "./ui/alert-dialog";
 import { useEffect, useState } from "react";
-import _api from "../api/_api";
 import { useRouter } from "next/navigation";
 
 interface IHeaderProps {
@@ -65,22 +64,27 @@ const Header = ({ isSearch }: IHeaderProps) => {
       if (data?.user?.id) {
         try {
           console.log("Fetching restaurant ID...");
-          const response = await _api.get("/myRestaurantId");
-          if (response.data) {
-            console.log("Restaurant ID fetched:", response.data);
-            setIdRestaurant(response.data);
+          const response = await fetch("/api/myRestaurantId");
+          const result = await response.json();
+          if (result) {
+            console.log("Restaurant ID fetched:", result);
+            setIdRestaurant(result);
           } else {
             console.log("No restaurant ID found.");
           }
         } catch (error) {
           console.error("Failed to fetch restaurant ID:", error);
+        } finally {
+          setLoading(false);
         }
+      } else {
+        setLoading(false);
       }
     };
 
     fetchRestaurant();
   }, [data]);
-  setTimeout(() => setLoading(false), 500); // Delay de 300 milissegundos
+
   useEffect(() => {
     console.log("Session status:", status);
     console.log("Session data:", data);
