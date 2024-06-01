@@ -103,7 +103,7 @@ const ProductEditItemCard = ({
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isConfirmDialogOpen}>
+            <AlertDialogCancel onClick={() => setIsConfirmDialogOpen(false)}>
               Cancelar
             </AlertDialogCancel>
             <AlertDialogAction

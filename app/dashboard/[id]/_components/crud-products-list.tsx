@@ -10,9 +10,19 @@ import {
 } from "@/app/_components/ui/table";
 import Image from "next/image";
 import { formatCurrency } from "@/app/_helpers/price";
-import { EditIcon, TrashIcon } from "lucide-react";
+import { EditIcon, Loader2, TrashIcon } from "lucide-react";
 import ProductEditItemCard from "./product-edit-item-card";
 import { useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogTitle,
+} from "@/app/_components/ui/alert-dialog";
 
 interface ICrudProductListProps {
   products: Prisma.ProductGetPayload<{
@@ -24,12 +34,15 @@ interface ICrudProductListProps {
 }
 
 const CrudProductsList = ({ products }: ICrudProductListProps) => {
+  const [isSubmitLoading, setIsSubmiLoading] = useState(false);
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const [currentProducts, setCurrentProducts] = useState(products);
   const deleteProduct = async (id: string) => {
     try {
       const data = await fetch(`/api/product/?id=${id}`, {
         method: "DELETE",
       });
+      setIsSubmiLoading(true);
       setCurrentProducts(
         currentProducts.filter((product) => product.id !== id),
       );
@@ -38,12 +51,14 @@ const CrudProductsList = ({ products }: ICrudProductListProps) => {
       return response;
     } catch (error) {
       console.log("Erro interno do servidor: ", error);
+    } finally {
+      setIsSubmiLoading(false);
     }
   };
   return (
-    <div className=" flex w-full flex-wrap items-center justify-center gap-2 overflow-y-auto bg-[#E5E5E5] lg:flex lg:flex-col">
-      <div className="hidden w-full lg:block">
-        <Table>
+    <div className=" overflow-y-autolg:flex  flex w-full flex-wrap items-center justify-center gap-2 bg-[#E5E5E5] lg:flex-col">
+      <div className="hidden  w-full lg:block">
+        <Table className=" mb-3 ">
           <TableHeader>
             <TableRow>
               <TableHead>Foto do Produto</TableHead>
@@ -84,7 +99,7 @@ const CrudProductsList = ({ products }: ICrudProductListProps) => {
                   </div>
                   <div
                     className="flex cursor-pointer flex-col items-center"
-                    onClick={() => deleteProduct(product.id)}
+                    onClick={() => setIsConfirmDialogOpen(true)}
                   >
                     <TrashIcon width={20} height={20} />
                     <span className="tex text-sm font-semibold text-red-600">
@@ -92,12 +107,45 @@ const CrudProductsList = ({ products }: ICrudProductListProps) => {
                     </span>
                   </div>
                 </TableCell>
+                <AlertDialog
+                  open={isConfirmDialogOpen}
+                  onOpenChange={setIsConfirmDialogOpen}
+                >
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        Deseja deletar este produto
+                      </AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Ao finalizar o produto sera deletado.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel
+                        onClick={() => setIsConfirmDialogOpen(false)}
+                      >
+                        Cancelar
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={() => {
+                          deleteProduct(product.id);
+                        }}
+                        disabled={isSubmitLoading}
+                      >
+                        {isSubmitLoading && (
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        )}
+                        Finalizar
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
-      <div className="flex w-full flex-wrap items-center  gap-2 lg:hidden">
+      <div className="flex min-h-full w-full flex-wrap items-center  gap-2 lg:hidden">
         {currentProducts.map((product) => (
           <ProductEditItemCard
             key={product.id}

@@ -41,7 +41,7 @@ interface IHeaderProps {
 }
 
 const Header = ({ isSearch }: IHeaderProps) => {
-  const { data, status } = useSession();
+  const { data } = useSession();
   const [idRestaurant, setIdRestaurant] = useState<string | null | undefined>(
     null,
   );
@@ -84,12 +84,6 @@ const Header = ({ isSearch }: IHeaderProps) => {
 
     fetchRestaurant();
   }, [data]);
-
-  useEffect(() => {
-    console.log("Session status:", status);
-    console.log("Session data:", data);
-    console.log("Restaurant ID:", idRestaurant);
-  }, [data, idRestaurant, status]);
 
   return (
     <>
